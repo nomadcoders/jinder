@@ -1,0 +1,19 @@
+{
+  "name": "jinder",
+  "version": "1.0.0",
+  "description": "Tinder Clone with NodeJS + Hapi + SocketIO and React Native\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nomadcoders/jinder.git"
+  },
+  "author": "Nicolas Serrano Arevalo <nico@nomadcoders.co>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nomadcoders/jinder/issues"
+  },
+  "homepage": "https://github.com/nomadcoders/jinder#readme"
+}

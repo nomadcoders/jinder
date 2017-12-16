@@ -1,7 +1,8 @@
 {
   "name": "jinder",
   "version": "1.0.0",
-  "description": "Tinder Clone with NodeJS + Hapi + SocketIO and React Native\"",
+  "description":
+    "Tinder Clone with NodeJS + HapiJS+ SocketIO + MongoDB + Redis and React Native",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

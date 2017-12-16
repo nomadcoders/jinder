@@ -1,8 +1,9 @@
 const Hapi = require("hapi");
+const db = require("./db");
 
 const server = new Hapi.Server({ port: 3000, host: "localhost" });
 
-async function start() {
+const start = async () => {
   try {
     await server.start();
   } catch (error) {
@@ -10,7 +11,7 @@ async function start() {
     process.exit(1);
   }
 
-  console.log("Server running at:", server.info.uri);
-}
+  console.log("Server running at:", server.info.uri, "✅");
+};
 
 start();

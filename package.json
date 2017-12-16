@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description":
     "Tinder Clone with NodeJS + HapiJS+ SocketIO + MongoDB + Redis and React Native",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "local": "nodemon server.js",
+    "prod": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/nomadcoders/jinder/issues"
   },
-  "homepage": "https://github.com/nomadcoders/jinder#readme"
+  "homepage": "https://github.com/nomadcoders/jinder#readme",
+  "dependencies": {
+    "hapi": "^17.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.13.3"
+  }
 }

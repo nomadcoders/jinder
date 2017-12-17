@@ -4,7 +4,6 @@ const bcrypt = require("bcrypt");
 const Boom = require("boom");
 const User = require("../model/User");
 const createUserSchema = require("../schemas/createUser");
-const verifyUniqueUser = require("../util/userFunctions").verifyUniqueUser;
 const createToken = require("../util/createToken");
 
 const hashPassword = async (password, cb) => {
@@ -18,28 +17,21 @@ const hashPassword = async (password, cb) => {
 module.exports = {
   method: "POST",
   path: "/api/users",
-  config: {
-    pre: [{ method: verifyUniqueUser, assign: "isUnique" }],
-    handler: (request, h) => {
-      if (!request.pre.isUnique) {
-        return h.response(Boom.badRequest("Email taken").output);
+  handler: (request, h) => {
+    const { email, name, password } = request.payload;
+
+    const existingUser = User.findOne({ email }, (err, user) => {
+      if (user) {
+        return true;
+      } else {
+        return false;
       }
-      let user = new User();
-      const { email, name, password } = request.payload;
-      user.email = email;
-      user.name = name;
-      hashPassword(password, (err, hash) => {
-        if (err) {
-          throw Boom.badRequest();
-        }
-        user.password = hash;
-        user.save((err, user) => {
-          if (err) {
-            throw Boom.badRequest();
-          }
-          res.response({ id_token: createToken(user) }).code(201);
-        });
-      });
+    });
+
+    if (existingUser) {
+      return h.response(Boom.badRequest("Email is already taken").output);
+    } else {
+      // create user
     }
   }
 };

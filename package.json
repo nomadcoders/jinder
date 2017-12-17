@@ -1,7 +1,8 @@
 {
   "name": "jinder",
   "version": "1.0.0",
-  "description": "Tinder Clone with NodeJS + HapiJS+ SocketIO + MongoDB + Redis and React Native",
+  "description":
+    "Tinder Clone with NodeJS + ExpressJS + SocketIO + MongoDB + Redis and React Native",
   "scripts": {
     "local": "nodemon server.js",
     "prod": "node server.js"
@@ -18,12 +19,7 @@
   "homepage": "https://github.com/nomadcoders/jinder#readme",
   "dependencies": {
     "bcrypt": "^1.0.3",
-    "bluebird": "^3.5.1",
-    "boom": "^7.1.1",
     "glob": "^7.1.2",
-    "hapi": "^17.1.1",
-    "hapi-auth-jwt": "^4.0.0",
-    "joi": "^13.0.2",
     "mongoose": "^4.13.7"
   },
   "devDependencies": {

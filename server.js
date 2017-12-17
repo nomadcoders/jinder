@@ -1,3 +1,5 @@
+"use strict";
+
 const Hapi = require("hapi");
 const secret = require("./config");
 const glob = require("glob");
@@ -13,7 +15,7 @@ const server = new Hapi.Server({ port: 3000, host: "localhost" });
 
 const registerJWT = async () => {
   try {
-    await server.register({ plugin: require("hapi-auth-jwt") });
+    await server.register({ plugin: require("./hapi-auth-jwt") });
     server.auth.strategy("jwt", "jwt", {
       key: secret,
       verifyOptions: { algorithms: ["HS256"] }

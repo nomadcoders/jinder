@@ -17,7 +17,11 @@
   },
   "homepage": "https://github.com/nomadcoders/jinder#readme",
   "dependencies": {
+    "boom": "^7.1.1",
+    "glob": "^7.1.2",
     "hapi": "^17.1.1",
+    "hapi-auth-jwt": "^4.0.0",
+    "joi": "^13.0.2",
     "mongoose": "^4.13.7"
   },
   "devDependencies": {

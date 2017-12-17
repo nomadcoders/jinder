@@ -18,6 +18,7 @@
   "homepage": "https://github.com/nomadcoders/jinder#readme",
   "dependencies": {
     "bcrypt": "^1.0.3",
+    "bluebird": "^3.5.1",
     "boom": "^7.1.1",
     "glob": "^7.1.2",
     "hapi": "^17.1.1",

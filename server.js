@@ -3,7 +3,7 @@
 const Hapi = require("hapi");
 const secret = require("./config");
 const glob = require("glob");
-const jwt = require("hapi-auth-jwt");
+const path = require("path");
 
 // Import the DB connection
 const db = require("./db").db;

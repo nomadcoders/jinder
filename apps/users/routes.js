@@ -47,10 +47,7 @@ router.post("/login", async (ctx, next) => {
   if (user) {
     const samePassword = await user.comparePassword(password);
     if (samePassword) {
-      const token = jwt.sign(
-        { id: user._id, email: user.email, name: user.name },
-        config.key
-      );
+      const token = jwt.sign({ email: user.email }, config.key);
       ctx.body = {
         token
       };
@@ -59,6 +56,14 @@ router.post("/login", async (ctx, next) => {
     }
   } else {
     ctx.throw(HttpStatus.BAD_REQUEST, "User not found");
+  }
+});
+
+router.get("/me", async (ctx, next) => {
+  const { email } = ctx.state.user;
+  const user = await User.findOne({ email }).select("-password");
+  if (user) {
+    ctx.body = user;
   }
 });
 

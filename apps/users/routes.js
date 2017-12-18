@@ -61,9 +61,35 @@ router.post("/login", async (ctx, next) => {
 
 router.get("/me", async (ctx, next) => {
   const { email } = ctx.state.user;
-  const user = await User.findOne({ email }).select("-password");
+  const user = await User.findOne({ email }).select("name email photo -_id");
   if (user) {
     ctx.body = user;
+  } else {
+    ctx.throw(HttpStatus.NOT_FOUND, "User not found");
+  }
+});
+
+router.post("/me", async (ctx, next) => {
+  const { email } = ctx.state.user;
+  const user = await User.findOneAndUpdate(
+    { email },
+    { ...ctx.request.body },
+    { new: true }
+  ).select("name email photo -_id");
+  if (user) {
+    ctx.body = user;
+  } else {
+    ctx.throw(HttpStatus.NOT_FOUND, "User not found");
+  }
+});
+
+router.get("/:email", async (ctx, next) => {
+  const { email } = ctx.params;
+  const user = await User.findOne({ email }).select("name email photo -_id");
+  if (user) {
+    ctx.body = user;
+  } else {
+    ctx.throw(HttpStatus.NOT_FOUND, "User not found");
   }
 });
 

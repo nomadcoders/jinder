@@ -2,6 +2,8 @@
 
 const mongoose = require("mongoose");
 
+mongoose.Promise = require("bluebird");
+
 const env = process.env.NODE_ENV;
 
 if (env === "production") {

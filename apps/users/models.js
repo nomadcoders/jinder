@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 
 const Schema = mongoose.Schema;
 
-const userModel = new Schema({
+const UserModel = new Schema({
   email: {
     type: String,
     required: true,
@@ -26,7 +26,7 @@ const userModel = new Schema({
   updated_at: Date
 });
 
-userModel.pre("save", next => {
+UserModel.pre("save", async function(next) {
   // Saving the 'this' into user
   const user = this;
   const currentDate = new Date();
@@ -39,17 +39,21 @@ userModel.pre("save", next => {
   if (!user.isModified("password")) {
     next();
   }
-  // If the password has been modified, salt it
-  bcrypt.genSalt(10, (err, salt) => {
-    if (err) return next(err);
-    // Hash the password + salt
-    bcrypt.hash(user.password, salt, (err, hash) => {
-      if (err) return next(err);
-      user.password = hash;
-      next();
-    });
-  });
-  next();
+  // If the password has been modified, salt and hash it
+  try {
+    const hash = await bcrypt.hash(user.password, 10);
+    user.password = hash;
+    next();
+  } catch (err) {
+    return next(err);
+  }
 });
 
-module.exports = mongoose.model("User", userModel);
+UserModel.methods.comparePassword = async (canditatePassword, callback) => {
+  const user = this;
+  const matches = await bcrypt.compare(canditatePassword, user);
+  if (matches) return true;
+  return false;
+};
+
+module.exports = mongoose.model("User", UserModel);

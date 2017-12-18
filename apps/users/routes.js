@@ -2,7 +2,9 @@
 
 const Router = require("koa-router");
 const HttpStatus = require("http-status-codes");
+const jwt = require("jsonwebtoken");
 const User = require("./models");
+const config = require("../../config");
 const router = new Router({
   prefix: "/api/users"
 });
@@ -31,7 +33,33 @@ router.post("/", async (ctx, next) => {
   if (!newUser) {
     ctx.throw(HttpStatus.INTERNAL_SERVER_ERROR);
   }
+  // Return created user
   ctx.body = { user: newUser };
+});
+
+router.post("/login", async (ctx, next) => {
+  // Grab the data from the request body
+  const { email, password } = ctx.request.body;
+  if (!email || !password) {
+    ctx.throw(HttpStatus.BAD_REQUEST, "All fields are required");
+  }
+  const user = await User.findOne({ email });
+  if (user) {
+    const samePassword = await user.comparePassword(password);
+    if (samePassword) {
+      const token = jwt.sign(
+        { id: user._id, email: user.email, name: user.name },
+        config.key
+      );
+      ctx.body = {
+        token
+      };
+    } else {
+      ctx.throw(HttpStatus.UNAUTHORIZED, "Authentication failed");
+    }
+  } else {
+    ctx.throw(HttpStatus.BAD_REQUEST, "User not found");
+  }
 });
 
 module.exports = router;

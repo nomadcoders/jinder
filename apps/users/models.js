@@ -49,9 +49,9 @@ UserModel.pre("save", async function(next) {
   }
 });
 
-UserModel.methods.comparePassword = async (canditatePassword, callback) => {
+UserModel.methods.comparePassword = async function(canditatePassword) {
   const user = this;
-  const matches = await bcrypt.compare(canditatePassword, user);
+  const matches = await bcrypt.compare(canditatePassword, user.password);
   if (matches) return true;
   return false;
 };

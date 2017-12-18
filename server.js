@@ -6,7 +6,9 @@ const bodyParser = require("koa-bodyparser");
 const convert = require("koa-convert");
 const koaRes = require("koa-res");
 const combineRouters = require("koa-combine-routers");
+const koaJwt = require("koa-jwt");
 const db = require("./db");
+const config = require("./config");
 
 // Import routers
 
@@ -42,6 +44,14 @@ app.use(bodyParser());
 // Format responses to JSON
 
 app.use(convert(koaRes()));
+
+// Enable JWT
+
+app.use(
+  koaJwt({ secret: config.key }).unless({
+    path: ["/api/users/", "/api/users/login/"]
+  })
+);
 
 // Combine Routers
 

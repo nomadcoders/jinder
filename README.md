@@ -1,3 +1,3 @@
 # jinder
 
-Tinder Clone with NodeJS + ExpressJS + SocketIO + MongoDB + Redis and React Native
+Tinder Clone with NodeJS + KoaJS + SocketIO + MongoDB + Redis and React Native

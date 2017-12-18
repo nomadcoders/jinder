@@ -2,7 +2,7 @@
   "name": "jinder",
   "version": "1.0.0",
   "description":
-    "Tinder Clone with NodeJS + ExpressJS + SocketIO + MongoDB + Redis and React Native",
+    "Tinder Clone with NodeJS + KoaJS + SocketIO + MongoDB + Redis and React Native",
   "scripts": {
     "local": "nodemon server.js",
     "prod": "node server.js"

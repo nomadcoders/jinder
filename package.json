@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/nomadcoders/jinder#readme",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "bluebird": "^3.5.1",
     "koa": "^2.4.1",
     "koa-bodyparser": "^4.2.0",

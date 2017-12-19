@@ -18,10 +18,7 @@ const UserModel = new Schema({
   password: {
     type: String,
     required: true
-  },
-  photo: {
-    type: String
-  },
+  }
   created_at: Date,
   updated_at: Date
 });
